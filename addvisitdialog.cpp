@@ -26,6 +26,8 @@ AddVisitDialog::AddVisitDialog(QWidget *parent) :
 
     connect(ui->studentNameEdit,SIGNAL(currentIndexChanged(QString)),this,SLOT(changeStudentId(QString)));
     connect(ui->studentIdEdit, SIGNAL(valueChanged(int)), this, SLOT(changeStudentName(int)));
+    connect(ui->submitButton, SIGNAL(clicked()), this, SLOT(submit()));
+    connect(ui->prevertButton, SIGNAL(clicked()),this,SLOT(prevert()));
 }
 
 
@@ -109,12 +111,55 @@ void AddVisitDialog::changeStudentName(int studentId)
 
 void AddVisitDialog::submit()
 {
+    /*QString currentFacultySelected = ui->facultyEdit->currentText();
+    QString currentGroupSelected = ui->groupEdit->currentText();
+    int facultyIdOfStudentToAdd;
+    int groupIdOfStudentToAdd;
+    QString nameOfStudentToAdd = ui->nameEdit->toPlainText();
+    QString adressOfStudentToAdd = ui->adressEdit->toPlainText();
 
+    QSqlQuery query;
+    query.exec(QString("SELECT id from faculty WHERE name = '%1'").arg(currentFacultySelected));
+    query.next();
+    facultyIdOfStudentToAdd = query.value(0).toInt();
+    query.exec(QString("SELECT id from groups WHERE name = '%1'").arg(currentGroupSelected));
+    query.next();
+    groupIdOfStudentToAdd = query.value(0).toInt();
+
+    query.exec(QString("INSERT into student values(NULL, '%1', '%2', '%3', '%4')").arg(nameOfStudentToAdd).arg(facultyIdOfStudentToAdd).arg(groupIdOfStudentToAdd).arg(adressOfStudentToAdd));
+    accept();*/
+
+    QDate currentDateSelected = ui->dateEdit->date();
+    QString currentDateString = currentDateSelected.toString("yyyy-MM-dd");
+    QString currentDiagnosisSelected = ui->diagnosisEdit->currentText();
+    QString currentDoctorSelected = ui->doctorEdit->currentText();
+
+    int studentId = ui->studentIdEdit->value();
+    int diagId;
+    int doctorId;
+
+
+    QSqlQuery query;
+
+    query.exec(QString("SELECT id from diagnosis WHERE name = '%1'").arg(currentDiagnosisSelected));
+    query.next();
+    diagId=query.value(0).toInt();
+
+    query.exec(QString("SELECT id from doctor WHERE name = '%1'").arg(currentDoctorSelected));
+    query.next();
+    doctorId=query.value(0).toInt();
+
+
+    query.exec(QString("INSERT into visit values(NULL, '%1', '%2', '%3', '%4')").arg(studentId).arg(currentDateString).arg(diagId).arg(doctorId));
+    accept();
 }
 
 void AddVisitDialog::prevert()
 {
-
+    ui->dateEdit->setDate(QDate::currentDate());
+    ui->studentNameEdit->setCurrentIndex(0);
+    ui->doctorEdit->setCurrentIndex(0);
+    ui->diagnosisEdit->setCurrentIndex(0);
 }
 
 AddVisitDialog::~AddVisitDialog()

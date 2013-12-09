@@ -16,11 +16,6 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
     connect(this, SIGNAL(rejected()), this, SLOT(revert()));
 }
 
-AddStudentDialog::~AddStudentDialog()
-{
-    delete faculties;
-    delete ui;
-}
 
 void AddStudentDialog::fillFaculties()
 {
@@ -95,4 +90,10 @@ void AddStudentDialog::revert()
 void AddStudentDialog::on_closeButton_clicked()
 {
     reject();
+}
+
+AddStudentDialog::~AddStudentDialog()
+{
+    delete faculties;
+    delete ui;
 }

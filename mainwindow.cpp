@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QSqlRelationalTableModel(this);
     delegate = new QSqlRelationalDelegate(ui->tableView);
 
+    //ui->tableView->setItemDelegateForColumn(QAbstractItemDelegate);
 
 
     //initializeModel(model);
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(updateTableView()));
     displayStudentTable(model);
     addStudentDialog = new AddStudentDialog(this);
+    addVisitDialog = new AddVisitDialog(this);
 }
 
 MainWindow::~MainWindow()
@@ -175,7 +177,14 @@ void MainWindow::on_actionStudent_triggered()
     addStudentDialog->show();
 }
 
+void MainWindow::on_actionVisit_triggered()
+{
+    connect(addVisitDialog,SIGNAL(accepted()),this,SLOT(on_submitButton_clicked()));
+    addVisitDialog->show();
+}
+
 void MainWindow::updateTableView()
 {
     ui->tableView->resizeColumnsToContents();
 }
+

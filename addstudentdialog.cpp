@@ -7,18 +7,18 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     faculties = new QStringList();
-    groups = new QStringList();
     fillFaculties();
-    fillGroups();
     ui->closeButton->setDefault(true);
     connect(ui->submitButton, SIGNAL(clicked()), this, SLOT(submit()));
     connect(ui->revertButton, SIGNAL(clicked()), this, SLOT(revert()));
+    connect(ui->facultyEdit, SIGNAL(currentIndexChanged(QString)), this, SLOT(fillGroups(QString)));
+    connect(this, SIGNAL(accepted()), this, SLOT(revert()));
+    connect(this, SIGNAL(rejected()), this, SLOT(revert()));
 }
 
 AddStudentDialog::~AddStudentDialog()
 {
     delete faculties;
-    delete groups;
     delete ui;
 }
 
@@ -31,6 +31,35 @@ void AddStudentDialog::fillFaculties()
         faculties->push_back(facultyName);
     }
     ui->facultyEdit->addItems(*faculties);
+    fillGroups(ui->facultyEdit->itemText(0));
+}
+
+/*void AddStudentDialog::fillGroups()
+{
+    QSqlQuery query("SELECT name FROM groups WHERE");
+    while (query.next())
+    {
+        QString groupName = query.value(0).toString();
+        groups->push_back(groupName);
+    }
+    ui->groupEdit->addItems(*groups);
+}*/
+
+void AddStudentDialog::fillGroups(QString facultyName)
+{
+    QSqlQuery query;
+    query.exec(QString("SELECT id from faculty WHERE name = '%1'").arg(facultyName));
+    query.next();
+    int facultyId = query.value(0).toInt();
+
+    query.exec(QString("SELECT name from groups WHERE fac_id = '%1'").arg(facultyId));
+
+    ui->groupEdit->clear();
+    while (query.next())
+    {
+        QString groupName = query.value(0).toString();
+        ui->groupEdit->addItem(groupName);
+    }
 }
 
 void AddStudentDialog::submit()
@@ -62,13 +91,8 @@ void AddStudentDialog::revert()
     ui->groupEdit->setCurrentIndex(0);
 }
 
-void AddStudentDialog::fillGroups()
+
+void AddStudentDialog::on_closeButton_clicked()
 {
-    QSqlQuery query("SELECT name FROM groups");
-    while (query.next())
-    {
-        QString groupName = query.value(0).toString();
-        groups->push_back(groupName);
-    }
-    ui->groupEdit->addItems(*groups);
+    reject();
 }

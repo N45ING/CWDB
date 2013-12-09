@@ -10,12 +10,16 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QSqlRelationalTableModel(this);
     delegate = new QSqlRelationalDelegate(ui->tableView);
 
+
+
     //initializeModel(model);
     ui->tableView->setModel(model);
     ui->tableView->setItemDelegate(delegate);
 
     connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeDisplayedTable(int)));
+    connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(updateTableView()));
     displayStudentTable(model);
     addStudentDialog = new AddStudentDialog(this);
 }
@@ -79,6 +83,10 @@ void MainWindow::displayStudentTable(QSqlRelationalTableModel *model)
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Group"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adress"));
     model->select();
+    for(int i=0; i< model->columnCount(); i++)
+    {
+        ui->tableView->resizeColumnsToContents();
+    }
 }
 
 void MainWindow::displayFacultiesTable(QSqlRelationalTableModel *model)
@@ -165,4 +173,9 @@ void MainWindow::on_actionStudent_triggered()
 {
     connect(addStudentDialog,SIGNAL(accepted()),this,SLOT(on_submitButton_clicked()));
     addStudentDialog->show();
+}
+
+void MainWindow::updateTableView()
+{
+    ui->tableView->resizeColumnsToContents();
 }

@@ -38,6 +38,7 @@ private slots:
     void changeDisplayedTable(int number);
     void on_submitButton_clicked();
     void on_actionStudent_triggered();
+    void updateTableView();
 };
 
 #endif // MAINWINDOW_H

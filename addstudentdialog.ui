@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>339</width>
-    <height>297</height>
+    <width>343</width>
+    <height>298</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,7 +118,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -153,22 +153,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>closeButton</sender>
-   <signal>clicked()</signal>
-   <receiver>AddStudentDialog</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>274</x>
-     <y>281</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>329</x>
-     <y>263</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

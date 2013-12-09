@@ -22,12 +22,12 @@ public:
 private:
     Ui::AddStudentDialog *ui;
     QStringList *faculties;
-    QStringList *groups;
-    void fillGroups();
     void fillFaculties();
 private slots:
     void submit();
     void revert();
+    void fillGroups(QString facultyName);
+    void on_closeButton_clicked();
 };
 
 #endif // ADDSTUDENTDIALOG_H

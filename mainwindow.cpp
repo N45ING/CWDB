@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayStudentTable(model);
     addStudentDialog = new AddStudentDialog(this);
     addVisitDialog = new AddVisitDialog(this);
+    addDiagnosisDialog = new AddDiagnosisDialog(this);
 }
 
 MainWindow::~MainWindow()
@@ -169,6 +170,7 @@ void MainWindow::displayVisitTable(QSqlRelationalTableModel *model)
 void MainWindow::on_submitButton_clicked()
 {
     model->submitAll();
+    emit updateTableView();
 }
 
 void MainWindow::on_actionStudent_triggered()
@@ -183,8 +185,14 @@ void MainWindow::on_actionVisit_triggered()
     addVisitDialog->show();
 }
 
+
+void MainWindow::on_actionDiagnosis_triggered()
+{
+    connect(addDiagnosisDialog, SIGNAL(accepted()),this, SLOT(on_submitButton_clicked()));
+    addDiagnosisDialog->show();
+}
+
 void MainWindow::updateTableView()
 {
     ui->tableView->resizeColumnsToContents();
 }
-

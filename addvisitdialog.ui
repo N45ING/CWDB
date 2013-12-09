@@ -159,9 +159,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="prevertButton">
+     <widget class="QPushButton" name="revertButton">
       <property name="text">
-       <string>Prevert</string>
+       <string>Revert</string>
       </property>
      </widget>
     </item>

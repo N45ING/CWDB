@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     addstudentdialog.cpp \
-    addvisitdialog.cpp
+    addvisitdialog.cpp \
+    adddiagnosisdialog.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
     addstudentdialog.h \
-    addvisitdialog.h
+    addvisitdialog.h \
+    adddiagnosisdialog.h
 
 FORMS    += mainwindow.ui \
     addstudentdialog.ui \
-    addvisitdialog.ui
+    addvisitdialog.ui \
+    adddiagnosisdialog.ui

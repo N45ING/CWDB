@@ -39,7 +39,7 @@ private slots:
     void changeStudentId(QString studentName);
     void changeStudentName(int studentId);
     void submit();
-    void prevert();
+    void revert();
 };
 
 #endif // ADDVISITDIALOG_H

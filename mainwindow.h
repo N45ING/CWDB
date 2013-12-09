@@ -4,6 +4,7 @@
 #include "connection.h"
 #include "addstudentdialog.h"
 #include "addvisitdialog.h"
+#include "adddiagnosisdialog.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -36,12 +37,14 @@ private:
     Ui::MainWindow *ui;
     AddStudentDialog *addStudentDialog;
     AddVisitDialog *addVisitDialog;
+    AddDiagnosisDialog *addDiagnosisDialog;
 private slots:
     void changeDisplayedTable(int number);
     void on_submitButton_clicked();
     void on_actionStudent_triggered();
     void updateTableView();
     void on_actionVisit_triggered();
+    void on_actionDiagnosis_triggered();
 };
 
 #endif // MAINWINDOW_H

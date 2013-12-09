@@ -27,7 +27,7 @@ AddVisitDialog::AddVisitDialog(QWidget *parent) :
     connect(ui->studentNameEdit,SIGNAL(currentIndexChanged(QString)),this,SLOT(changeStudentId(QString)));
     connect(ui->studentIdEdit, SIGNAL(valueChanged(int)), this, SLOT(changeStudentName(int)));
     connect(ui->submitButton, SIGNAL(clicked()), this, SLOT(submit()));
-    connect(ui->prevertButton, SIGNAL(clicked()),this,SLOT(prevert()));
+    connect(ui->revertButton, SIGNAL(clicked()),this,SLOT(revert()));
 }
 
 
@@ -111,24 +111,6 @@ void AddVisitDialog::changeStudentName(int studentId)
 
 void AddVisitDialog::submit()
 {
-    /*QString currentFacultySelected = ui->facultyEdit->currentText();
-    QString currentGroupSelected = ui->groupEdit->currentText();
-    int facultyIdOfStudentToAdd;
-    int groupIdOfStudentToAdd;
-    QString nameOfStudentToAdd = ui->nameEdit->toPlainText();
-    QString adressOfStudentToAdd = ui->adressEdit->toPlainText();
-
-    QSqlQuery query;
-    query.exec(QString("SELECT id from faculty WHERE name = '%1'").arg(currentFacultySelected));
-    query.next();
-    facultyIdOfStudentToAdd = query.value(0).toInt();
-    query.exec(QString("SELECT id from groups WHERE name = '%1'").arg(currentGroupSelected));
-    query.next();
-    groupIdOfStudentToAdd = query.value(0).toInt();
-
-    query.exec(QString("INSERT into student values(NULL, '%1', '%2', '%3', '%4')").arg(nameOfStudentToAdd).arg(facultyIdOfStudentToAdd).arg(groupIdOfStudentToAdd).arg(adressOfStudentToAdd));
-    accept();*/
-
     QDate currentDateSelected = ui->dateEdit->date();
     QString currentDateString = currentDateSelected.toString("yyyy-MM-dd");
     QString currentDiagnosisSelected = ui->diagnosisEdit->currentText();
@@ -149,12 +131,11 @@ void AddVisitDialog::submit()
     query.next();
     doctorId=query.value(0).toInt();
 
-
     query.exec(QString("INSERT into visit values(NULL, '%1', '%2', '%3', '%4')").arg(studentId).arg(currentDateString).arg(diagId).arg(doctorId));
     accept();
 }
 
-void AddVisitDialog::prevert()
+void AddVisitDialog::revert()
 {
     ui->dateEdit->setDate(QDate::currentDate());
     ui->studentNameEdit->setCurrentIndex(0);

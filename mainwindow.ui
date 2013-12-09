@@ -106,6 +106,7 @@
      </property>
      <addaction name="actionStudent"/>
      <addaction name="actionVisit"/>
+     <addaction name="actionDiagnosis"/>
     </widget>
     <addaction name="menuAdd"/>
    </widget>
@@ -128,6 +129,11 @@
   <action name="actionVisit">
    <property name="text">
     <string>Visit</string>
+   </property>
+  </action>
+  <action name="actionDiagnosis">
+   <property name="text">
+    <string>Diagnosis</string>
    </property>
   </action>
  </widget>

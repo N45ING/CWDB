@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "connection.h"
+#include "addstudentdialog.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -23,8 +24,20 @@ public:
     QSqlRelationalTableModel *model;
     QSqlRelationalDelegate *delegate;
 
+    void displayStudentTable(QSqlRelationalTableModel *model);
+    void displayFacultiesTable(QSqlRelationalTableModel *model);
+    void displayGroupsTable(QSqlRelationalTableModel *model);
+    void displayDoctorsTable(QSqlRelationalTableModel *model);
+    void displayDiagnosisTable(QSqlRelationalTableModel *model);
+    void displayVisitTable(QSqlRelationalTableModel *model);
+
 private:
     Ui::MainWindow *ui;
+    AddStudentDialog *addStudentDialog;
+private slots:
+    void changeDisplayedTable(int number);
+    void on_submitButton_clicked();
+    void on_actionStudent_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -24,7 +24,7 @@ static bool createConnection()
 
     /*query.exec("insert into student values(1, 'Espen', 1, 1, 'DNIWE')");
     query.exec("insert into student values(2, 'Espens', 1, 1, 'DNIWE')");*/
-    query.exec("insert into student values(NULL, '123', 1, 2, 'asd')");
+    //query.exec("insert into student values(NULL, '123', 1, 2, 'asd')");
     return true;
 }
 

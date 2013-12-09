@@ -13,9 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    addstudentdialog.cpp
 
 HEADERS  += mainwindow.h \
-    connection.h
+    connection.h \
+    addstudentdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    addstudentdialog.ui

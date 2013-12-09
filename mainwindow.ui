@@ -6,29 +6,109 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>425</height>
+    <width>715</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QTableView" name="tableView"/>
-    </item>
-   </layout>
+   <widget class="QTableView" name="tableView">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>70</y>
+      <width>581</width>
+      <height>381</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="tableGroupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>301</width>
+      <height>53</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Display</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QComboBox" name="tablesComboBox">
+       <item>
+        <property name="text">
+         <string>Students</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Faculties</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Groups</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Doctors</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Diagnosis</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Visits</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="submitButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>32</y>
+      <width>75</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Submit</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>576</width>
+     <width>715</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuAdd">
+     <property name="title">
+      <string>Add...</string>
+     </property>
+     <addaction name="actionStudent"/>
+    </widget>
+    <addaction name="menuAdd"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -39,6 +119,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionStudent">
+   <property name="text">
+    <string>Student</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

@@ -2,6 +2,10 @@
 #define ADDDOCTORDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QStringList>
+#include <QString>
+#include <QtSql>
 
 namespace Ui {
 class AddDoctorDialog;
@@ -17,6 +21,10 @@ public:
 
 private:
     Ui::AddDoctorDialog *ui;
+private slots:
+    void submit();
+    void revert();
+    void on_closeButton_clicked();
 };
 
 #endif // ADDDOCTORDIALOG_H

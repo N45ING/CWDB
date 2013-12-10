@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     addStudentDialog = new AddStudentDialog(this);
     addVisitDialog = new AddVisitDialog(this);
     addDiagnosisDialog = new AddDiagnosisDialog(this);
+    addDoctorDialog = new AddDoctorDialog(this);
 }
 
 MainWindow::~MainWindow()
@@ -199,9 +200,14 @@ void MainWindow::on_actionDiagnosis_triggered()
     addDiagnosisDialog->show();
 }
 
+
+void MainWindow::on_actionDoctor_triggered()
+{
+    connect(addDoctorDialog, SIGNAL(accepted()), this, SLOT(on_submitButton_clicked()));
+    addDoctorDialog->show();
+}
+
 void MainWindow::updateTableView()
 {
     ui->tableView->resizeColumnsToContents();
 }
-
-

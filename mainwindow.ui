@@ -28,50 +28,54 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>2</y>
       <width>301</width>
-      <height>53</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="title">
      <string>Display</string>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QComboBox" name="tablesComboBox">
-       <item>
-        <property name="text">
-         <string>Students</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Faculties</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Groups</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Doctors</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Diagnosis</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Visits</string>
-        </property>
-       </item>
-      </widget>
+    <widget class="QComboBox" name="tablesComboBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>26</y>
+       <width>281</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Students</string>
+      </property>
      </item>
-    </layout>
+     <item>
+      <property name="text">
+       <string>Faculties</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Groups</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Doctors</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Diagnosis</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Visits</string>
+      </property>
+     </item>
+    </widget>
    </widget>
    <widget class="QPushButton" name="submitButton">
     <property name="geometry">
@@ -84,6 +88,19 @@
     </property>
     <property name="text">
      <string>Submit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteButton">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>30</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
     </property>
    </widget>
   </widget>
@@ -107,6 +124,7 @@
      <addaction name="actionStudent"/>
      <addaction name="actionVisit"/>
      <addaction name="actionDiagnosis"/>
+     <addaction name="actionDoctor"/>
     </widget>
     <addaction name="menuAdd"/>
    </widget>
@@ -134,6 +152,11 @@
   <action name="actionDiagnosis">
    <property name="text">
     <string>Diagnosis</string>
+   </property>
+  </action>
+  <action name="actionDoctor">
+   <property name="text">
+    <string>Doctor</string>
    </property>
   </action>
  </widget>

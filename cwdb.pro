@@ -16,15 +16,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     addstudentdialog.cpp \
     addvisitdialog.cpp \
-    adddiagnosisdialog.cpp
+    adddiagnosisdialog.cpp \
+    adddoctordialog.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
     addstudentdialog.h \
     addvisitdialog.h \
-    adddiagnosisdialog.h
+    adddiagnosisdialog.h \
+    adddoctordialog.h
 
 FORMS    += mainwindow.ui \
     addstudentdialog.ui \
     addvisitdialog.ui \
-    adddiagnosisdialog.ui
+    adddiagnosisdialog.ui \
+    adddoctordialog.ui

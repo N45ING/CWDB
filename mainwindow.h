@@ -33,6 +33,7 @@ public:
     void displayDiagnosisTable(QSqlRelationalTableModel *model);
     void displayVisitTable(QSqlRelationalTableModel *model);
 
+
 private:
     Ui::MainWindow *ui;
     AddStudentDialog *addStudentDialog;
@@ -45,6 +46,7 @@ private slots:
     void updateTableView();
     void on_actionVisit_triggered();
     void on_actionDiagnosis_triggered();
+    void deleteRowFromTable();
 };
 
 #endif // MAINWINDOW_H

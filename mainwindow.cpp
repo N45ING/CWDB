@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(changeDisplayedTable(int)));
     connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(updateTableView()));
+    connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteRowFromTable()));
     displayStudentTable(model);
     addStudentDialog = new AddStudentDialog(this);
     addVisitDialog = new AddVisitDialog(this);
@@ -167,6 +168,12 @@ void MainWindow::displayVisitTable(QSqlRelationalTableModel *model)
     model->select();
 }
 
+void MainWindow::deleteRowFromTable()
+{
+    int row = ui->tableView->currentIndex().row();
+    model->removeRow(row);
+}
+
 void MainWindow::on_submitButton_clicked()
 {
     model->submitAll();
@@ -196,3 +203,5 @@ void MainWindow::updateTableView()
 {
     ui->tableView->resizeColumnsToContents();
 }
+
+

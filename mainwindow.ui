@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>StudentDiseasesAnalysis</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableView" name="tableView">
@@ -130,6 +130,7 @@
      <addaction name="actionDoctor"/>
     </widget>
     <addaction name="menuAdd"/>
+    <addaction name="actionManage"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -146,20 +147,37 @@
    <property name="text">
     <string>Student</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
   </action>
   <action name="actionVisit">
    <property name="text">
     <string>Visit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
    </property>
   </action>
   <action name="actionDiagnosis">
    <property name="text">
     <string>Diagnosis</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
   </action>
   <action name="actionDoctor">
    <property name="text">
     <string>Doctor</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionManage">
+   <property name="text">
+    <string>Manage</string>
    </property>
   </action>
  </widget>

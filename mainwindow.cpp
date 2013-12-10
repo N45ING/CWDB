@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(updateTableView()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteRowFromTable()));
-    connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT());
     connect(ui->tableView, SIGNAL(clicked(QModelIndex)),this, SLOT(setEnabledDeleteButton(QModelIndex)));
     connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDisabledDeleteButton(int)));
     displayStudentTable(model);
@@ -119,8 +118,15 @@ void MainWindow::displayGroupsTable(QSqlRelationalTableModel *model)
     }
     model->setTable("groups");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+
+
+    //TODO HERE YOU HAVE TO SET ALL EDIT TRIGGERS DEPENDING ON TABLE SELECTED BUT NO HERE IN YOR PROGRAMui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    model->setRelation(2, QSqlRelation("faculty", "id", "name"));
+
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Name"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Faculty"));
     model->select();
 }
 

@@ -50,6 +50,8 @@ private slots:
     void on_actionDiagnosis_triggered();
     void deleteRowFromTable();
     void on_actionDoctor_triggered();
+    void setEnabledDeleteButton(QModelIndex index);
+    void setDisabledDeleteButton(int i);
 };
 
 #endif // MAINWINDOW_H

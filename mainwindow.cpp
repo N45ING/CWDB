@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(updateTableView()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deleteRowFromTable()));
+    connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT());
+    connect(ui->tableView, SIGNAL(clicked(QModelIndex)),this, SLOT(setEnabledDeleteButton(QModelIndex)));
+    connect(ui->tablesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDisabledDeleteButton(int)));
     displayStudentTable(model);
     addStudentDialog = new AddStudentDialog(this);
     addVisitDialog = new AddVisitDialog(this);
@@ -205,6 +208,26 @@ void MainWindow::on_actionDoctor_triggered()
 {
     connect(addDoctorDialog, SIGNAL(accepted()), this, SLOT(on_submitButton_clicked()));
     addDoctorDialog->show();
+}
+
+void MainWindow::setDisabledDeleteButton(int i)
+{
+    if(i>0)
+    {
+        ui->deleteButton->setDisabled(true);
+    }
+}
+
+void MainWindow::setEnabledDeleteButton(QModelIndex index)
+{
+    if(index.isValid())
+    {
+        ui->deleteButton->setEnabled(true);
+    }
+    else
+    {
+        ui->deleteButton->setEnabled(false);
+    }
 }
 
 void MainWindow::updateTableView()

@@ -17,17 +17,23 @@ SOURCES += main.cpp\
     addstudentdialog.cpp \
     addvisitdialog.cpp \
     adddiagnosisdialog.cpp \
-    adddoctordialog.cpp
+    adddoctordialog.cpp \
+    addfacultydialog.cpp \
+    addgroupdialog.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
     addstudentdialog.h \
     addvisitdialog.h \
     adddiagnosisdialog.h \
-    adddoctordialog.h
+    adddoctordialog.h \
+    addfacultydialog.h \
+    addgroupdialog.h
 
 FORMS    += mainwindow.ui \
     addstudentdialog.ui \
     addvisitdialog.ui \
     adddiagnosisdialog.ui \
-    adddoctordialog.ui
+    adddoctordialog.ui \
+    addfacultydialog.ui \
+    addgroupdialog.ui

@@ -7,6 +7,7 @@
 #include <QString>
 #include <QtSql>
 
+
 namespace Ui {
 class AddStudentDialog;
 }

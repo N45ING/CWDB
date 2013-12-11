@@ -28,6 +28,7 @@ private:
     QStringList *diagnosis;
     QStringList *doctors;
     QStringList *students;
+    QStringList *id;
     QVector<int> *ids;
 
     void fillDiagnosis();
@@ -37,7 +38,7 @@ private:
 
 private slots:
     void changeStudentId(QString studentName);
-    void changeStudentName(int studentId);
+    void changeStudentName(QString studentTextId);
     void submit();
     void revert();
 };

@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddDoctorDialog</class>
- <widget class="QDialog" name="AddDoctorDialog">
+ <class>AddFacultyDialog</class>
+ <widget class="QDialog" name="AddFacultyDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>131</height>
+    <width>395</width>
+    <height>139</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Додати Лікаря</string>
+   <string>Додати Факультет</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>371</width>
-     <height>81</height>
+     <x>9</x>
+     <y>9</y>
+     <width>382</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="title">
-    <string>Додати Лікаря</string>
+    <string>Додати Факультет</string>
    </property>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>351</width>
-      <height>51</height>
+      <width>361</width>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="nameLabel">
        <property name="text">
-        <string>Ім'я</string>
+        <string>Назва:</string>
        </property>
       </widget>
      </item>
@@ -51,10 +51,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>371</width>
-     <height>25</height>
+     <x>20</x>
+     <y>90</y>
+     <width>361</width>
+     <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">

@@ -6,10 +6,10 @@ AddVisitDialog::AddVisitDialog(QWidget *parent) :
     ui(new Ui::AddVisitDialog)
 {
     ui->setupUi(this);
-
     diagnosis = new QStringList();
     doctors = new QStringList();
     students = new QStringList();
+    id = new QStringList();
     ids = new QVector<int>;
 
     fillDiagnosis();
@@ -19,13 +19,17 @@ AddVisitDialog::AddVisitDialog(QWidget *parent) :
     ui->doctorEdit->setEditable(true);
     ui->diagnosisEdit->setEditable(true);
     ui->studentNameEdit->setEditable(true);
+    ui->studentIdEdit->setEditable(true);
+
+    ui->studentNameEdit->setFocus();
+    ui->closeButton->setDefault(true);
 
     ui->dateEdit->setMaximumDate(QDate::currentDate());
     ui->dateEdit->setDate(QDate::currentDate());
 
 
     connect(ui->studentNameEdit,SIGNAL(currentIndexChanged(QString)),this,SLOT(changeStudentId(QString)));
-    connect(ui->studentIdEdit, SIGNAL(valueChanged(int)), this, SLOT(changeStudentName(int)));
+    connect(ui->studentIdEdit, SIGNAL(currentIndexChanged(QString)), this, SLOT(changeStudentName(QString)));
     connect(ui->submitButton, SIGNAL(clicked()), this, SLOT(submit()));
     connect(ui->revertButton, SIGNAL(clicked()),this,SLOT(revert()));
 }
@@ -68,18 +72,10 @@ void AddVisitDialog::fillStudents()
     QSqlQuery queryId("SELECT id from student");
     while(queryId.next())
     {
-        int studentId = queryId.value(0).toInt();
-        ids->push_back(studentId);
+        QString studentId = queryId.value(0).toString();
+        id->push_back(studentId);
     }
-    int maxId = ids->at(0);
-    int minId = ids->at(0);
-    for(int i=0;i<ids->size();i++)
-    {
-        if (ids->at(i)>maxId) maxId=ids->at(i);
-        if (ids->at(i)<minId) minId=ids->at(i);
-    }
-    ui->studentIdEdit->setMinimum(minId);
-    ui->studentIdEdit->setMaximum(maxId);
+    ui->studentIdEdit->addItems(*id);
 }
 
 void AddVisitDialog::changeStudentId(QString studentName)
@@ -88,12 +84,13 @@ void AddVisitDialog::changeStudentId(QString studentName)
     query.exec(QString("SELECT id from student WHERE name = '%1'").arg(studentName));
     query.next();
     int studentId = query.value(0).toInt();
-    ui->studentIdEdit->setValue(studentId);
+    ui->studentIdEdit->setCurrentText(QString::number(studentId));
 }
 
-void AddVisitDialog::changeStudentName(int studentId)
+void AddVisitDialog::changeStudentName(QString studentTextId)
 {
     QSqlQuery query;
+    int studentId = studentTextId.toInt();
     query.exec(QString("SELECT name from student WHERE id = '%1'").arg(studentId));
     query.next();
     QString studentName = query.value(0).toString();
@@ -116,7 +113,7 @@ void AddVisitDialog::submit()
     QString currentDiagnosisSelected = ui->diagnosisEdit->currentText();
     QString currentDoctorSelected = ui->doctorEdit->currentText();
 
-    int studentId = ui->studentIdEdit->value();
+    int studentId = ui->studentIdEdit->currentText().toInt();
     int diagId;
     int doctorId;
 
@@ -149,6 +146,7 @@ AddVisitDialog::~AddVisitDialog()
     delete doctors;
     delete students;
     delete ids;
+    delete id;
     delete ui;
 }
 

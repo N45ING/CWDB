@@ -6,11 +6,14 @@
 #include "addvisitdialog.h"
 #include "adddiagnosisdialog.h"
 #include "adddoctordialog.h"
+#include "addfacultydialog.h"
+#include "addgroupdialog.h"
 
 #include <QMainWindow>
 #include <QTableView>
 #include <QtSql>
 #include <QDebug>
+#include <QFlags>
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +44,8 @@ private:
     AddVisitDialog *addVisitDialog;
     AddDiagnosisDialog *addDiagnosisDialog;
     AddDoctorDialog *addDoctorDialog;
+    AddFacultyDialog *addFacultyDialog;
+    AddGroupDialog *addGroupDialog;
 private slots:
     void changeDisplayedTable(int number);
     void on_submitButton_clicked();
@@ -52,6 +57,8 @@ private slots:
     void on_actionDoctor_triggered();
     void setEnabledDeleteButton(QModelIndex index);
     void setDisabledDeleteButton(int i);
+    void on_actionFaculty_triggered();
+    void on_actionGroup_triggered();
 };
 
 #endif // MAINWINDOW_H

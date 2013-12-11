@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>StudentDiseasesAnalysis</string>
+   <string>Аналіз Захворюваності Студентів</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableView" name="tableView">
@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Display</string>
+     <string>Відобразити</string>
     </property>
     <widget class="QComboBox" name="tablesComboBox">
      <property name="geometry">
@@ -47,32 +47,32 @@
      </property>
      <item>
       <property name="text">
-       <string>Students</string>
+       <string>Студенти</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Faculties</string>
+       <string>Факультети</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Groups</string>
+       <string>Групи</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Doctors</string>
+       <string>Лікарі</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Diagnosis</string>
+       <string>Діагнози</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Visits</string>
+       <string>Відвідування</string>
       </property>
      </item>
     </widget>
@@ -82,12 +82,12 @@
      <rect>
       <x>330</x>
       <y>32</y>
-      <width>75</width>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Submit</string>
+     <string>Зберегти зміни</string>
     </property>
    </widget>
    <widget class="QPushButton" name="deleteButton">
@@ -96,14 +96,14 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>430</x>
       <y>30</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Delete</string>
+     <string>Видалити</string>
     </property>
    </widget>
   </widget>
@@ -118,16 +118,18 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Файл</string>
     </property>
     <widget class="QMenu" name="menuAdd">
      <property name="title">
-      <string>Add...</string>
+      <string>Додати...</string>
      </property>
      <addaction name="actionStudent"/>
      <addaction name="actionVisit"/>
      <addaction name="actionDiagnosis"/>
      <addaction name="actionDoctor"/>
+     <addaction name="actionFaculty"/>
+     <addaction name="actionGroup"/>
     </widget>
     <addaction name="menuAdd"/>
     <addaction name="actionManage"/>
@@ -145,7 +147,10 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionStudent">
    <property name="text">
-    <string>Student</string>
+    <string>Студента</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати студента до бази.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
@@ -153,7 +158,10 @@
   </action>
   <action name="actionVisit">
    <property name="text">
-    <string>Visit</string>
+    <string>Відвідування</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати відвідування до бази.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>
@@ -161,7 +169,10 @@
   </action>
   <action name="actionDiagnosis">
    <property name="text">
-    <string>Diagnosis</string>
+    <string>Діагноз</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати діагноз до бази.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+3</string>
@@ -169,7 +180,10 @@
   </action>
   <action name="actionDoctor">
    <property name="text">
-    <string>Doctor</string>
+    <string>Лікаря</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати лікаря до бази.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+4</string>
@@ -178,6 +192,28 @@
   <action name="actionManage">
    <property name="text">
     <string>Manage</string>
+   </property>
+  </action>
+  <action name="actionFaculty">
+   <property name="text">
+    <string>Факультет</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати факультет до бази.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionGroup">
+   <property name="text">
+    <string>Групу</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати групу до бази.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
    </property>
   </action>
  </widget>

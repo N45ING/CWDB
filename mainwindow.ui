@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>529</height>
+    <width>860</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
      <rect>
       <x>10</x>
       <y>2</y>
-      <width>301</width>
+      <width>181</width>
       <height>61</height>
      </rect>
     </property>
@@ -41,7 +41,7 @@
       <rect>
        <x>10</x>
        <y>26</y>
-       <width>281</width>
+       <width>161</width>
        <height>21</height>
       </rect>
      </property>
@@ -80,8 +80,8 @@
    <widget class="QPushButton" name="submitButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>32</y>
+      <x>200</x>
+      <y>30</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -96,7 +96,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>300</x>
       <y>30</y>
       <width>75</width>
       <height>23</height>
@@ -106,13 +106,124 @@
      <string>Видалити</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="filterGroupBox">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>70</y>
+      <width>331</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Фільтр</string>
+    </property>
+    <widget class="QLabel" name="facultyLabel">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>60</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Факультет:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="facultyComboBox">
+     <property name="geometry">
+      <rect>
+       <x>169</x>
+       <y>60</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="groupLabel">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>120</y>
+       <width>34</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Група:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="groupComboBox">
+     <property name="geometry">
+      <rect>
+       <x>169</x>
+       <y>120</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="filterLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Фільтр не застосовано.</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>291</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="useFilterButton">
+        <property name="text">
+         <string>Застосувати фільтр</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelFilterButton">
+        <property name="text">
+         <string>Скасувати фільтр</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="showVisitButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Відвідування</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>525</width>
+     <width>860</width>
      <height>21</height>
     </rect>
    </property>
@@ -120,21 +231,27 @@
     <property name="title">
      <string>Файл</string>
     </property>
-    <widget class="QMenu" name="menuAdd">
-     <property name="title">
-      <string>Додати...</string>
-     </property>
-     <addaction name="actionStudent"/>
-     <addaction name="actionVisit"/>
-     <addaction name="actionDiagnosis"/>
-     <addaction name="actionDoctor"/>
-     <addaction name="actionFaculty"/>
-     <addaction name="actionGroup"/>
-    </widget>
-    <addaction name="menuAdd"/>
-    <addaction name="actionManage"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Додати</string>
+    </property>
+    <addaction name="actionStudent"/>
+    <addaction name="actionVisit"/>
+    <addaction name="actionDiagnosis"/>
+    <addaction name="actionDoctor"/>
+    <addaction name="actionFaculty"/>
+    <addaction name="actionGroup"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Пошук</string>
+    </property>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -189,9 +306,9 @@
     <string>Ctrl+4</string>
    </property>
   </action>
-  <action name="actionManage">
+  <action name="actionExit">
    <property name="text">
-    <string>Manage</string>
+    <string>Вихід</string>
    </property>
   </action>
   <action name="actionFaculty">

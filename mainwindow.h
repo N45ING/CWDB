@@ -14,6 +14,8 @@
 #include <QtSql>
 #include <QDebug>
 #include <QFlags>
+#include <QStringList>
+#include <QString>
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,7 @@ public:
     void displayDoctorsTable(QSqlRelationalTableModel *model);
     void displayDiagnosisTable(QSqlRelationalTableModel *model);
     void displayVisitTable(QSqlRelationalTableModel *model);
+    void displayVisitOfStudent(QSqlRelationalTableModel *model, int studentId);
 
 
 private:
@@ -46,6 +49,16 @@ private:
     AddDoctorDialog *addDoctorDialog;
     AddFacultyDialog *addFacultyDialog;
     AddGroupDialog *addGroupDialog;
+
+    QStringList *faculties;
+    void fillFaculties();
+    void clearFaculties();
+    void changeSize(bool isExpanded);
+
+    const int WIDTH = 518;
+    const int HEIGHT = 518;
+    const int EXPANDED_WIDTH = 860;
+
 private slots:
     void changeDisplayedTable(int number);
     void on_submitButton_clicked();
@@ -59,6 +72,11 @@ private slots:
     void setDisabledDeleteButton(int i);
     void on_actionFaculty_triggered();
     void on_actionGroup_triggered();
+    void fillGroups(QString facultyName);
+    void on_useFilterButton_clicked();
+    void on_cancelFilterButton_clicked();
+    void on_showVisitButton_clicked();
+    void on_actionExit_triggered();
 };
 
 #endif // MAINWINDOW_H

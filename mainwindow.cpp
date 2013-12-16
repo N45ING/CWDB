@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QSqlRelationalTableModel(this);
     delegate = new QSqlRelationalDelegate(ui->tableView);
     faculties = new QStringList();
+    student = new Student();
     fillFaculties();
     ui->facultyComboBox->setEditable(true);
     ui->groupComboBox->setEditable(true);
@@ -62,34 +63,26 @@ void MainWindow::changeDisplayedTable(int number)
     {
         case 0: {
             displayStudentTable(model);
-            fillFaculties();
-            ui->useFilterButton->setFocus();
-            changeSize(true);
         }
         break;
         case 1: {
             displayFacultiesTable(model);
-            changeSize(false);
         }
         break;
         case 2:{
             displayGroupsTable(model);
-            changeSize(false);
         }
         break;
         case 3: {
             displayDoctorsTable(model);
-            changeSize(false);
         }
         break;
         case 4: {
             displayDiagnosisTable(model);
-            changeSize(false);
         }
         break;
         case 5: {
             displayVisitTable(model);
-            changeSize(false);
         }
         break;
     };
@@ -150,6 +143,9 @@ void MainWindow::fillGroups(QString facultyName)
 
 void MainWindow::displayStudentTable(QSqlRelationalTableModel *model)
 {
+    fillFaculties();
+    ui->useFilterButton->setFocus();
+    changeSize(true);
     if(model->isDirty())
     {
         model->submitAll();
@@ -174,6 +170,7 @@ void MainWindow::displayStudentTable(QSqlRelationalTableModel *model)
 
 void MainWindow::displayFacultiesTable(QSqlRelationalTableModel *model)
 {
+    changeSize(false);
     if(model->isDirty())
     {
         model->submitAll();
@@ -187,6 +184,7 @@ void MainWindow::displayFacultiesTable(QSqlRelationalTableModel *model)
 
 void MainWindow::displayGroupsTable(QSqlRelationalTableModel *model)
 {
+    changeSize(false);
     if(model->isDirty())
     {
         model->submitAll();
@@ -208,6 +206,7 @@ void MainWindow::displayGroupsTable(QSqlRelationalTableModel *model)
 
 void MainWindow::displayDoctorsTable(QSqlRelationalTableModel *model)
 {
+    changeSize(false);
     if(model->isDirty())
     {
         model->submitAll();
@@ -221,6 +220,7 @@ void MainWindow::displayDoctorsTable(QSqlRelationalTableModel *model)
 
 void MainWindow::displayDiagnosisTable(QSqlRelationalTableModel *model)
 {
+    changeSize(false);
     if(model->isDirty())
     {
         model->submitAll();
@@ -235,6 +235,7 @@ void MainWindow::displayDiagnosisTable(QSqlRelationalTableModel *model)
 
 void MainWindow::displayVisitTable(QSqlRelationalTableModel *model)
 {
+    changeSize(false);
     if(model->isDirty())
     {
        model->submitAll();
@@ -344,6 +345,113 @@ void MainWindow::on_actionGroup_triggered()
     addGroupDialog->show();
 }
 
+void MainWindow::on_actionFindStudent_triggered()
+{
+    fStudentDialog = new findStudentDialog(student,this);
+    connect(fStudentDialog, SIGNAL(accepted()), this, SLOT(updateTableView()));
+    connect(fStudentDialog, SIGNAL(accepted()), this, SLOT(findStudent()));
+    fStudentDialog->show();
+}
+
+void MainWindow::findStudent()
+{
+    if (!student->name.isEmpty())
+    {
+        if(student->facultyName != QObject::tr("Невідомо"))
+        {
+            if(student->groupName != QObject::tr("Невідомо"))
+            {
+                    int facultyIdOfStudent;
+                    int groupIdOfStudent;
+                    int idOfStudent;
+
+                    QSqlQuery query;
+                    query.exec(QString("SELECT id from faculty WHERE name = '%1'").arg(student->facultyName));
+                    query.next();
+                    facultyIdOfStudent = query.value(0).toInt();
+                    query.exec(QString("SELECT id from groups WHERE name = '%1'").arg(student->groupName));
+                    query.next();
+                    groupIdOfStudent = query.value(0).toInt();
+                    query.exec(QString("SELECT id from student WHERE name = '%1'").arg(student->name));
+                    query.next();
+                    idOfStudent = query.value(0).toInt();
+
+                    model->setTable("student");
+                    model->setFilter(QString("student.id = %1 and faculty_id = %2 and group_id = %3").arg(idOfStudent).arg(facultyIdOfStudent).arg(groupIdOfStudent));
+                    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+                    model->setRelation(2, QSqlRelation("faculty", "id", "name"));
+                    model->setRelation(3, QSqlRelation("groups", "id", "name"));
+
+                    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Ім'я"));
+                    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Факультет"));
+                    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Група"));
+                    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Адреса"));
+                    model->select();
+                    for(int i=0; i< model->columnCount(); i++)
+                    {
+                        ui->tableView->resizeColumnsToContents();
+                    }
+            }
+            else
+            {
+                int facultyIdOfStudent;
+                int idOfStudent;
+
+                QSqlQuery query;
+                query.exec(QString("SELECT id from faculty WHERE name = '%1'").arg(student->facultyName));
+                query.next();
+                facultyIdOfStudent = query.value(0).toInt();
+                query.exec(QString("SELECT id from student WHERE name = '%1'").arg(student->name));
+                query.next();
+                idOfStudent = query.value(0).toInt();
+
+                model->setTable("student");
+                model->setFilter(QString("student.id = %1 and faculty_id = %2").arg(idOfStudent).arg(facultyIdOfStudent));
+                model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+                model->setRelation(2, QSqlRelation("faculty", "id", "name"));
+                model->setRelation(3, QSqlRelation("groups", "id", "name"));
+
+                model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                model->setHeaderData(1, Qt::Horizontal, QObject::tr("Ім'я"));
+                model->setHeaderData(2, Qt::Horizontal, QObject::tr("Факультет"));
+                model->setHeaderData(3, Qt::Horizontal, QObject::tr("Група"));
+                model->setHeaderData(4, Qt::Horizontal, QObject::tr("Адреса"));
+                model->select();
+                for(int i=0; i< model->columnCount(); i++)
+                {
+                    ui->tableView->resizeColumnsToContents();
+                }
+            }
+        }
+        else
+        {
+            int idOfStudent;
+            QSqlQuery query;
+            query.exec(QString("SELECT id from student WHERE name = '%1'").arg(student->name));
+            query.next();
+            idOfStudent = query.value(0).toInt();
+
+            model->setTable("student");
+            model->setFilter(QString("student.id = %1").arg(idOfStudent));
+            model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+            model->setRelation(2, QSqlRelation("faculty", "id", "name"));
+            model->setRelation(3, QSqlRelation("groups", "id", "name"));
+
+            model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+            model->setHeaderData(1, Qt::Horizontal, QObject::tr("Ім'я"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("Факультет"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("Група"));
+            model->setHeaderData(4, Qt::Horizontal, QObject::tr("Адреса"));
+            model->select();
+            for(int i=0; i< model->columnCount(); i++)
+            {
+                ui->tableView->resizeColumnsToContents();
+            }
+        }
+    }
+}
+
 void MainWindow::setDisabledDeleteButton(int i)
 {
     if(i>0)
@@ -420,6 +528,15 @@ void MainWindow::on_showVisitButton_clicked()
 {
     int studentId = model->data(ui->tableView->currentIndex()).toInt();
     displayVisitOfStudent(model,studentId);
+}
+
+void MainWindow::on_addStudentVisit_clicked()
+{
+    int studentId = model->data(ui->tableView->currentIndex()).toInt();
+    addVisitDialog = new AddVisitDialog(studentId);
+    connect(addVisitDialog,SIGNAL(accepted()),this,SLOT(on_submitButton_clicked()));
+    on_submitButton_clicked();
+    addVisitDialog->show();
 }
 
 void MainWindow::on_actionExit_triggered()

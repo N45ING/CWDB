@@ -18,6 +18,7 @@ class AddVisitDialog : public QDialog
 
 public:
     explicit AddVisitDialog(QWidget *parent = 0);
+    explicit AddVisitDialog(int studentId,QWidget *parent = 0);
     ~AddVisitDialog();
 
 private slots:

@@ -29,7 +29,7 @@
      <rect>
       <x>10</x>
       <y>2</y>
-      <width>181</width>
+      <width>311</width>
       <height>61</height>
      </rect>
     </property>
@@ -41,7 +41,7 @@
       <rect>
        <x>10</x>
        <y>26</y>
-       <width>161</width>
+       <width>291</width>
        <height>21</height>
       </rect>
      </property>
@@ -80,7 +80,7 @@
    <widget class="QPushButton" name="submitButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>330</x>
       <y>30</y>
       <width>91</width>
       <height>21</height>
@@ -96,7 +96,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>430</x>
       <y>30</y>
       <width>75</width>
       <height>23</height>
@@ -207,14 +207,27 @@
    <widget class="QPushButton" name="showVisitButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>30</y>
-      <width>101</width>
+      <x>520</x>
+      <y>310</y>
+      <width>201</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Відвідування</string>
+     <string>Відобразити усі відвідування</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addStudentVisit">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>340</y>
+      <width>201</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Додати відвідування</string>
     </property>
    </widget>
   </widget>
@@ -248,6 +261,7 @@
     <property name="title">
      <string>Пошук</string>
     </property>
+    <addaction name="actionFindStudent"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu"/>
@@ -331,6 +345,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionFindStudent">
+   <property name="text">
+    <string>Студента</string>
    </property>
   </action>
  </widget>

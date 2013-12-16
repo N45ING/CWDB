@@ -9,6 +9,10 @@
 #include "addfacultydialog.h"
 #include "addgroupdialog.h"
 
+#include "findstudentdialog.h"
+
+#include "student.h"
+
 #include <QMainWindow>
 #include <QTableView>
 #include <QtSql>
@@ -50,10 +54,14 @@ private:
     AddFacultyDialog *addFacultyDialog;
     AddGroupDialog *addGroupDialog;
 
+    findStudentDialog *fStudentDialog;
+
     QStringList *faculties;
     void fillFaculties();
     void clearFaculties();
     void changeSize(bool isExpanded);
+    Student *student;
+
 
     const int WIDTH = 518;
     const int HEIGHT = 518;
@@ -77,6 +85,9 @@ private slots:
     void on_cancelFilterButton_clicked();
     void on_showVisitButton_clicked();
     void on_actionExit_triggered();
+    void on_actionFindStudent_triggered();
+    void findStudent();
+    void on_addStudentVisit_clicked();
 };
 
 #endif // MAINWINDOW_H

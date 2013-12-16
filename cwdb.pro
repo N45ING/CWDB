@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     adddiagnosisdialog.cpp \
     adddoctordialog.cpp \
     addfacultydialog.cpp \
-    addgroupdialog.cpp
+    addgroupdialog.cpp \
+    findstudentdialog.cpp \
+    student.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
@@ -28,7 +30,9 @@ HEADERS  += mainwindow.h \
     adddiagnosisdialog.h \
     adddoctordialog.h \
     addfacultydialog.h \
-    addgroupdialog.h
+    addgroupdialog.h \
+    findstudentdialog.h \
+    student.h
 
 FORMS    += mainwindow.ui \
     addstudentdialog.ui \
@@ -36,4 +40,5 @@ FORMS    += mainwindow.ui \
     adddiagnosisdialog.ui \
     adddoctordialog.ui \
     addfacultydialog.ui \
-    addgroupdialog.ui
+    addgroupdialog.ui \
+    findstudentdialog.ui

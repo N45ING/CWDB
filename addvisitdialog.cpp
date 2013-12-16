@@ -34,7 +34,29 @@ AddVisitDialog::AddVisitDialog(QWidget *parent) :
     connect(ui->revertButton, SIGNAL(clicked()),this,SLOT(revert()));
 }
 
-
+AddVisitDialog::AddVisitDialog(int studentId,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AddVisitDialog)
+{
+    ui->setupUi(this);
+    diagnosis = new QStringList();
+    doctors = new QStringList();
+    fillDiagnosis();
+    fillDoctors();
+    ui->doctorEdit->setEditable(true);
+    ui->diagnosisEdit->setEditable(true);
+    ui->closeButton->setDefault(true);
+    ui->dateEdit->setMaximumDate(QDate::currentDate());
+    ui->dateEdit->setDate(QDate::currentDate());
+    QSqlQuery query;
+    query.exec(QString("SELECT name from student where student.id = %1").arg(studentId));
+    query.next();
+    QString studentName = query.value(0).toString();
+    ui->studentNameEdit->addItem(studentName);
+    ui->studentIdEdit->addItem(QString::number(studentId));
+    connect(ui->submitButton, SIGNAL(clicked()), this, SLOT(submit()));
+    connect(ui->revertButton, SIGNAL(clicked()),this,SLOT(revert()));
+}
 
 void AddVisitDialog::fillDiagnosis()
 {
@@ -116,7 +138,6 @@ void AddVisitDialog::submit()
     int studentId = ui->studentIdEdit->currentText().toInt();
     int diagId;
     int doctorId;
-
 
     QSqlQuery query;
 

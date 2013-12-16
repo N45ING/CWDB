@@ -8,9 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     model = new QSqlRelationalTableModel(this);
+    qmodel = new QSqlQueryModel(this);
     delegate = new QSqlRelationalDelegate(ui->tableView);
     faculties = new QStringList();
     student = new Student();
+    visit = new Visit();
     fillFaculties();
     ui->facultyComboBox->setEditable(true);
     ui->groupComboBox->setEditable(true);
@@ -62,26 +64,32 @@ void MainWindow::changeDisplayedTable(int number)
     switch(number)
     {
         case 0: {
+            ui->tableView->setModel(model);
             displayStudentTable(model);
         }
         break;
         case 1: {
+            ui->tableView->setModel(model);
             displayFacultiesTable(model);
         }
         break;
         case 2:{
+            ui->tableView->setModel(model);
             displayGroupsTable(model);
         }
         break;
         case 3: {
+            ui->tableView->setModel(model);
             displayDoctorsTable(model);
         }
         break;
         case 4: {
+            ui->tableView->setModel(model);
             displayDiagnosisTable(model);
         }
         break;
         case 5: {
+            ui->tableView->setModel(model);
             displayVisitTable(model);
         }
         break;
@@ -452,6 +460,71 @@ void MainWindow::findStudent()
     }
 }
 
+void MainWindow::on_actionFindVisit_triggered()
+{
+    findVisitDialog = new FindVisitDialog(visit,this);
+    connect(findVisitDialog, SIGNAL(accepted()), this, SLOT(findVisit()));
+    findVisitDialog->show();
+}
+
+void MainWindow::findVisit()
+{
+    if(visit->groupName != QObject::tr("Невідомо"))
+    {
+        QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+        QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+        QString facultyName = visit->facultyName;
+        QString groupName = visit->groupName;
+        qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                 " visit.date as vdate, student.name as sname,"
+                                 " faculty.name as fname, groups.name as gname,"
+                                 " diagnosis.name as diname, doctor.name as doname"
+                                 " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                 " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                 " and faculty.name = '%3' and groups.name = '%4'"
+                                 " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                 " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                 " and visit.doctor_id = doctor.id"
+                                 " GROUP BY vid").arg(beginDateString).arg(endDateString).arg(facultyName).arg(groupName));
+        qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+        qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+        qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+        qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+        qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+        qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+        qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+        ui->tableView->setModel(qmodel);
+        updateTableView();
+    }
+    else
+    {
+        QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+        QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+        QString facultyName = visit->facultyName;
+        qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                 " visit.date as vdate, student.name as sname,"
+                                 " faculty.name as fname, groups.name as gname,"
+                                 " diagnosis.name as diname, doctor.name as doname"
+                                 " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                 " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                 " and faculty.name = '%3'"
+                                 " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                 " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                 " and visit.doctor_id = doctor.id"
+                                 " GROUP BY vid"
+                                 " ORDER BY vdate").arg(beginDateString).arg(endDateString).arg(facultyName));
+        qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+        qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+        qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+        qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+        qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+        qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+        qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+        ui->tableView->setModel(qmodel);
+        updateTableView();
+    }
+}
+
 void MainWindow::setDisabledDeleteButton(int i)
 {
     if(i>0)
@@ -462,7 +535,7 @@ void MainWindow::setDisabledDeleteButton(int i)
 
 void MainWindow::setEnabledDeleteButton(QModelIndex index)
 {
-    if(index.isValid())
+    if(index.isValid() && ui->tableView->model() != qmodel)
     {
         ui->deleteButton->setEnabled(true);
     }
@@ -543,3 +616,5 @@ void MainWindow::on_actionExit_triggered()
 {
     this->close();
 }
+
+

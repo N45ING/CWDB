@@ -177,7 +177,7 @@
       <string>Фільтр не застосовано.</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -262,6 +262,7 @@
      <string>Пошук</string>
     </property>
     <addaction name="actionFindStudent"/>
+    <addaction name="actionFindVisit"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu"/>
@@ -350,6 +351,11 @@
   <action name="actionFindStudent">
    <property name="text">
     <string>Студента</string>
+   </property>
+  </action>
+  <action name="actionFindVisit">
+   <property name="text">
+    <string>Відвідувань</string>
    </property>
   </action>
  </widget>

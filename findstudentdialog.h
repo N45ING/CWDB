@@ -24,9 +24,7 @@ public:
 private slots:
     void on_findButton_clicked();
     void fillGroups(QString facultyName);
-
     void on_prevertButton_clicked();
-
     void on_cancelButton_clicked();
 
 private:

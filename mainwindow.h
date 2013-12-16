@@ -10,8 +10,10 @@
 #include "addgroupdialog.h"
 
 #include "findstudentdialog.h"
+#include "findvisitdialog.h"
 
 #include "student.h"
+#include "visit.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -34,6 +36,7 @@ public:
     ~MainWindow();
     void initializeModel(QSqlRelationalTableModel *model);
     QSqlRelationalTableModel *model;
+    QSqlQueryModel *qmodel;
     QSqlRelationalDelegate *delegate;
 
     void displayStudentTable(QSqlRelationalTableModel *model);
@@ -55,12 +58,14 @@ private:
     AddGroupDialog *addGroupDialog;
 
     findStudentDialog *fStudentDialog;
+    FindVisitDialog *findVisitDialog;
 
     QStringList *faculties;
     void fillFaculties();
     void clearFaculties();
     void changeSize(bool isExpanded);
     Student *student;
+    Visit *visit;
 
 
     const int WIDTH = 518;
@@ -87,7 +92,9 @@ private slots:
     void on_actionExit_triggered();
     void on_actionFindStudent_triggered();
     void findStudent();
+    void findVisit();
     void on_addStudentVisit_clicked();
+    void on_actionFindVisit_triggered();
 };
 
 #endif // MAINWINDOW_H

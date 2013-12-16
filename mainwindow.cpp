@@ -467,8 +467,10 @@ void MainWindow::on_actionFindVisit_triggered()
     findVisitDialog->show();
 }
 
+
 void MainWindow::findVisit()
 {
+    changeSize(false);
     if(visit->groupName != QObject::tr("Невідомо"))
     {
         QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");

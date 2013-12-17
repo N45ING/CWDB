@@ -15,6 +15,7 @@
 #include "student.h"
 #include "visit.h"
 
+#include <QtCore>
 #include <QMainWindow>
 #include <QTableView>
 #include <QtSql>
@@ -22,6 +23,10 @@
 #include <QFlags>
 #include <QStringList>
 #include <QString>
+#include <QFile>
+#include <QFileDialog>
+#include <QTableWidgetItem>
+
 
 namespace Ui {
 class MainWindow;
@@ -95,6 +100,7 @@ private slots:
     void findVisit();
     void on_addStudentVisit_clicked();
     void on_actionFindVisit_triggered();
+    void on_actionExportExcel_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -619,4 +619,10 @@ void MainWindow::on_actionExit_triggered()
     this->close();
 }
 
-
+void MainWindow::on_actionExportExcel_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
+                                                    tr("Excel Files (*.csv)"));
+    if (fileName.isEmpty())
+        return;
+}

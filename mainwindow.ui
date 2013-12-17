@@ -83,7 +83,7 @@
       <x>330</x>
       <y>30</y>
       <width>91</width>
-      <height>21</height>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -99,7 +99,7 @@
       <x>430</x>
       <y>30</y>
       <width>75</width>
-      <height>23</height>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -264,9 +264,16 @@
     <addaction name="actionFindStudent"/>
     <addaction name="actionFindVisit"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Звіт</string>
+    </property>
+    <addaction name="actionExportExcel"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -356,6 +363,11 @@
   <action name="actionFindVisit">
    <property name="text">
     <string>Відвідувань</string>
+   </property>
+  </action>
+  <action name="actionExportExcel">
+   <property name="text">
+    <string>Експортувати</string>
    </property>
   </action>
  </widget>

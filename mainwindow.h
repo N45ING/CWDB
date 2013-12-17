@@ -15,6 +15,8 @@
 #include "student.h"
 #include "visit.h"
 
+#include "exportexcelobject.h"
+
 #include <QtCore>
 #include <QMainWindow>
 #include <QTableView>

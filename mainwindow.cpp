@@ -622,7 +622,35 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionExportExcel_triggered()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
-                                                    tr("Excel Files (*.csv)"));
+                                                    tr("Excel Files (*.xls)"));
     if (fileName.isEmpty())
         return;
+
+    ExportExcelObject obj(fileName, "mydata", ui->tableView);
+    if(ui->tableView->model() == model)
+    {
+        obj.addField(1, "Імя", "char(200)");
+        obj.addField(2, "Факультет", "char(200)");
+        obj.addField(3, "Група", "char(200)");
+        obj.addField(4, "Адреса", "char(200)");
+    }
+    else if(ui->tableView->model() == qmodel)
+    {
+        obj.addField(1, "Дата", "char(200)");
+        obj.addField(2, "Імя", "char(200)");
+        obj.addField(3, "Факультет", "char(200)");
+        obj.addField(4, "Група", "char(200)");
+        obj.addField(5, "Діагноз", "char(200)");
+        obj.addField(6, "Лікар", "char(200)");
+    }
+
+
+
+    int retVal = obj.export2Excel();
+    if( retVal > 0)
+    {
+        QMessageBox::information(this, tr("Done"),
+                                 QString(tr("%1 records exported!")).arg(retVal)
+                                 );
+    }
 }

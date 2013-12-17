@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     findstudentdialog.cpp \
     student.cpp \
     findvisitdialog.cpp \
-    visit.cpp
+    visit.cpp \
+    exportexcelobject.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
@@ -36,7 +37,8 @@ HEADERS  += mainwindow.h \
     findstudentdialog.h \
     student.h \
     findvisitdialog.h \
-    visit.h
+    visit.h \
+    exportexcelobject.h
 
 FORMS    += mainwindow.ui \
     addstudentdialog.ui \

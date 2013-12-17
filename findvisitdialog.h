@@ -21,10 +21,12 @@ public:
     explicit FindVisitDialog(Visit *visit,QWidget *parent = 0);
     ~FindVisitDialog();
     void fillFaculties();
+    void fillDiagnosis();
 
 private:
     Visit *visit;
     QStringList *faculties;
+    QStringList *diagnosis;
 
     Ui::FindVisitDialog *ui;
 private slots:

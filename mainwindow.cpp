@@ -471,59 +471,180 @@ void MainWindow::on_actionFindVisit_triggered()
 void MainWindow::findVisit()
 {
     changeSize(false);
-    if(visit->groupName != QObject::tr("Невідомо"))
+    if(visit->facultyName != QObject::tr("Невідомо"))
     {
-        QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
-        QString endDateString = visit->endDate.toString("yyyy-MM-dd");
-        QString facultyName = visit->facultyName;
-        QString groupName = visit->groupName;
-        qmodel->setQuery(QString("SELECT visit.id as vid,"
-                                 " visit.date as vdate, student.name as sname,"
-                                 " faculty.name as fname, groups.name as gname,"
-                                 " diagnosis.name as diname, doctor.name as doname"
-                                 " FROM visit, student, faculty, groups, diagnosis, doctor"
-                                 " WHERE visit.date >= '%1' and visit.date <= '%2'"
-                                 " and faculty.name = '%3' and groups.name = '%4'"
-                                 " and visit.stud_id = student.id and student.faculty_id = faculty.id"
-                                 " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
-                                 " and visit.doctor_id = doctor.id"
-                                 " GROUP BY vid").arg(beginDateString).arg(endDateString).arg(facultyName).arg(groupName));
-        qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-        qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
-        qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
-        qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
-        qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
-        qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
-        qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
-        ui->tableView->setModel(qmodel);
-        updateTableView();
+        if(visit->groupName != QObject::tr("Невідомо"))
+        {
+            if(visit->diagnosis != QObject::tr("Будь-яка"))
+            {
+                QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+                QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+                QString facultyName = visit->facultyName;
+                QString groupName = visit->groupName;
+                QString diagnosis = visit->diagnosis;
+                qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                         " visit.date as vdate, student.name as sname,"
+                                         " faculty.name as fname, groups.name as gname,"
+                                         " diagnosis.name as diname, doctor.name as doname"
+                                         " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                         " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                         " and faculty.name = '%3' and groups.name = '%4'"
+                                         " and diagnosis.name = '%5'"
+                                         " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                         " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                         " and visit.doctor_id = doctor.id"
+                                         " GROUP BY vid").arg(beginDateString).arg(endDateString).arg(facultyName).arg(groupName).arg(diagnosis));
+                qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+                qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+                qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+                qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+                qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+                qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+                ui->tableView->setModel(qmodel);
+                updateTableView();
+            }
+            else
+            {
+                QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+                QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+                QString facultyName = visit->facultyName;
+                QString groupName = visit->groupName;
+                qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                         " visit.date as vdate, student.name as sname,"
+                                         " faculty.name as fname, groups.name as gname,"
+                                         " diagnosis.name as diname, doctor.name as doname"
+                                         " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                         " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                         " and faculty.name = '%3' and groups.name = '%4'"
+                                         " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                         " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                         " and visit.doctor_id = doctor.id"
+                                         " GROUP BY vid").arg(beginDateString).arg(endDateString).arg(facultyName).arg(groupName));
+                qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+                qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+                qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+                qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+                qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+                qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+                ui->tableView->setModel(qmodel);
+                updateTableView();
+            }
+        }
+        else
+        {
+            if(visit->diagnosis != QObject::tr("Будь-яка"))
+            {
+                QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+                QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+                QString facultyName = visit->facultyName;
+                QString diagnosis = visit->diagnosis;
+                qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                         " visit.date as vdate, student.name as sname,"
+                                         " faculty.name as fname, groups.name as gname,"
+                                         " diagnosis.name as diname, doctor.name as doname"
+                                         " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                         " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                         " and faculty.name = '%3' and diagnosis.name = '%4'"
+                                         " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                         " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                         " and visit.doctor_id = doctor.id"
+                                         " GROUP BY vid"
+                                         " ORDER BY vdate").arg(beginDateString).arg(endDateString).arg(facultyName).arg(diagnosis));
+                qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+                qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+                qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+                qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+                qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+                qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+                ui->tableView->setModel(qmodel);
+                updateTableView();
+            }
+            else
+            {
+                QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+                QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+                QString facultyName = visit->facultyName;
+                qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                         " visit.date as vdate, student.name as sname,"
+                                         " faculty.name as fname, groups.name as gname,"
+                                         " diagnosis.name as diname, doctor.name as doname"
+                                         " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                         " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                         " and faculty.name = '%3'"
+                                         " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                         " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                         " and visit.doctor_id = doctor.id"
+                                         " GROUP BY vid"
+                                         " ORDER BY vdate").arg(beginDateString).arg(endDateString).arg(facultyName));
+                qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+                qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+                qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+                qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+                qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+                qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+                qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+                ui->tableView->setModel(qmodel);
+                updateTableView();
+            }
+        }
     }
     else
     {
-        QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
-        QString endDateString = visit->endDate.toString("yyyy-MM-dd");
-        QString facultyName = visit->facultyName;
-        qmodel->setQuery(QString("SELECT visit.id as vid,"
-                                 " visit.date as vdate, student.name as sname,"
-                                 " faculty.name as fname, groups.name as gname,"
-                                 " diagnosis.name as diname, doctor.name as doname"
-                                 " FROM visit, student, faculty, groups, diagnosis, doctor"
-                                 " WHERE visit.date >= '%1' and visit.date <= '%2'"
-                                 " and faculty.name = '%3'"
-                                 " and visit.stud_id = student.id and student.faculty_id = faculty.id"
-                                 " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
-                                 " and visit.doctor_id = doctor.id"
-                                 " GROUP BY vid"
-                                 " ORDER BY vdate").arg(beginDateString).arg(endDateString).arg(facultyName));
-        qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-        qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
-        qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
-        qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
-        qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
-        qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
-        qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
-        ui->tableView->setModel(qmodel);
-        updateTableView();
+        if(visit->diagnosis != QObject::tr("Будь-яка"))
+        {
+            QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+            QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+            QString diagnosis = visit->diagnosis;
+            qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                     " visit.date as vdate, student.name as sname,"
+                                     " faculty.name as fname, groups.name as gname,"
+                                     " diagnosis.name as diname, doctor.name as doname"
+                                     " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                     " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                     " and diagnosis.name = '%3'"
+                                     " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                     " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                     " and visit.doctor_id = doctor.id"
+                                     " GROUP BY vid"
+                                     " ORDER BY vdate").arg(beginDateString).arg(endDateString).arg(diagnosis));
+            qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+            qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+            qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+            qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+            qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+            qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+            qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+            ui->tableView->setModel(qmodel);
+            updateTableView();
+        }
+        else
+        {
+            QString beginDateString = visit->beginDate.toString("yyyy-MM-dd");
+            QString endDateString = visit->endDate.toString("yyyy-MM-dd");
+            qmodel->setQuery(QString("SELECT visit.id as vid,"
+                                     " visit.date as vdate, student.name as sname,"
+                                     " faculty.name as fname, groups.name as gname,"
+                                     " diagnosis.name as diname, doctor.name as doname"
+                                     " FROM visit, student, faculty, groups, diagnosis, doctor"
+                                     " WHERE visit.date >= '%1' and visit.date <= '%2'"
+                                     " and visit.stud_id = student.id and student.faculty_id = faculty.id"
+                                     " and student.group_id = groups.id and visit.diag_id = diagnosis.id"
+                                     " and visit.doctor_id = doctor.id"
+                                     " GROUP BY vid"
+                                     " ORDER BY vdate").arg(beginDateString).arg(endDateString));
+            qmodel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+            qmodel->setHeaderData(1, Qt::Horizontal, QObject::tr("Дата"));
+            qmodel->setHeaderData(2, Qt::Horizontal, QObject::tr("Ім'я студента"));
+            qmodel->setHeaderData(3, Qt::Horizontal, QObject::tr("Факультет"));
+            qmodel->setHeaderData(4, Qt::Horizontal, QObject::tr("Група"));
+            qmodel->setHeaderData(5, Qt::Horizontal, QObject::tr("Діагноз"));
+            qmodel->setHeaderData(6, Qt::Horizontal, QObject::tr("Лікар"));
+            ui->tableView->setModel(qmodel);
+            updateTableView();
+        }
     }
 }
 
@@ -626,7 +747,19 @@ void MainWindow::on_actionExportExcel_triggered()
     if (fileName.isEmpty())
         return;
 
-    ExportExcelObject obj(fileName, "mydata", ui->tableView);
+    QString listName;
+    /*if(ui->tableView->model() == model)
+    {
+        listName = QObject::tr("Студенти");
+    }
+    else if(ui->tableView->model() == qmodel)
+    {
+        listName = QObject::tr("Звіт");
+    }*/
+    listName = QObject::tr("Звіт");
+    listName.append(" ");
+    listName.append(QDate::currentDate().toString("yyyy-MM-dd"));
+    ExportExcelObject obj(fileName, listName, ui->tableView);
     if(ui->tableView->model() == model)
     {
         obj.addField(1, "Імя", "char(200)");
@@ -643,6 +776,7 @@ void MainWindow::on_actionExportExcel_triggered()
         obj.addField(5, "Діагноз", "char(200)");
         obj.addField(6, "Лікар", "char(200)");
     }
+
 
 
 

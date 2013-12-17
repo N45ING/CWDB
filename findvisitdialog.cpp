@@ -8,10 +8,12 @@ FindVisitDialog::FindVisitDialog(Visit * visit,QWidget *parent) :
     ui->setupUi(this);
     this->visit = visit;
     faculties = new QStringList();
+    diagnosis = new QStringList();
     ui->facultyEdit->setEditable(true);
     ui->groupEdit->setEditable(true);
     ui->closeButton->setFocus();
     fillFaculties();
+    fillDiagnosis();
 
 
     ui->beginDateEdit->setMaximumDate(QDate::currentDate());
@@ -30,6 +32,7 @@ FindVisitDialog::~FindVisitDialog()
 void FindVisitDialog::fillFaculties()
 {
     QSqlQuery query("SELECT name FROM faculty");
+    ui->facultyEdit->addItem(QObject::tr("Невідомо"));
     while (query.next())
     {
         QString facultyName = query.value(0).toString();
@@ -57,12 +60,25 @@ void FindVisitDialog::fillGroups(QString facultyName)
     }
 }
 
+void FindVisitDialog::fillDiagnosis()
+{
+    QSqlQuery query("SELECT name FROM diagnosis");
+    ui->diagnosisEdit->addItem(QObject::tr("Будь-яка"));
+    while(query.next())
+    {
+        QString diagnosisName = query.value(0).toString();
+        diagnosis->push_back(diagnosisName);
+    }
+    ui->diagnosisEdit->addItems(*diagnosis);
+}
+
 void FindVisitDialog::on_findButton_clicked()
 {
    visit->facultyName  = ui->facultyEdit->currentText();
    visit->groupName = ui->groupEdit->currentText();
    visit->beginDate = ui->beginDateEdit->date();
    visit->endDate = ui->endDateEdit->date();
+   visit->diagnosis = ui->diagnosisEdit->currentText();
    accept();
 }
 

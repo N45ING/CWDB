@@ -11,6 +11,7 @@ public:
     Visit();
     QString facultyName;
     QString groupName;
+    QString diagnosis;
     QDate beginDate;
     QDate endDate;
 };

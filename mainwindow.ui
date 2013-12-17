@@ -360,14 +360,14 @@
     <string>Студента</string>
    </property>
   </action>
-  <action name="actionFindVisit">
-   <property name="text">
-    <string>Відвідувань</string>
-   </property>
-  </action>
   <action name="actionExportExcel">
    <property name="text">
     <string>Експортувати</string>
+   </property>
+  </action>
+  <action name="actionFindVisit">
+   <property name="text">
+    <string>Відвідувань</string>
    </property>
   </action>
  </widget>
